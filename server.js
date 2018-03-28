@@ -7,6 +7,9 @@ const app = express();
 
 // Create Middleware to serve app
 app.use('/', serveStatic(path.join(__dirname, '/public')));
+app.get('*', function(req, res) {
+    res.sendFile(__dirname + '/public/index.html');
+});
 
 // CREATE DEFAULT PORT TO SERVE THE APP
 const port = process.env.PORT || 5000;
