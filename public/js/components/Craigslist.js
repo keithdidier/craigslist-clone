@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 116:
+/***/ 123:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -16,29 +16,29 @@ var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(14);
+var _reactDom = __webpack_require__(15);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(244);
+var _reactRouterDom = __webpack_require__(270);
 
-var _Header = __webpack_require__(119);
+var _Header = __webpack_require__(144);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _Home = __webpack_require__(122);
+var _Home = __webpack_require__(147);
 
 var _Home2 = _interopRequireDefault(_Home);
 
-var _Listings = __webpack_require__(123);
+var _Listings = __webpack_require__(148);
 
 var _Listings2 = _interopRequireDefault(_Listings);
 
-var _Details = __webpack_require__(121);
+var _Details = __webpack_require__(146);
 
 var _Details2 = _interopRequireDefault(_Details);
 
-var _Category = __webpack_require__(120);
+var _Category = __webpack_require__(145);
 
 var _Category2 = _interopRequireDefault(_Category);
 
@@ -95,7 +95,7 @@ exports.default = App;
 
 /***/ }),
 
-/***/ 118:
+/***/ 143:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -105,11 +105,11 @@ var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(14);
+var _reactDom = __webpack_require__(15);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _App = __webpack_require__(116);
+var _App = __webpack_require__(123);
 
 var _App2 = _interopRequireDefault(_App);
 
@@ -121,7 +121,7 @@ _reactDom2.default.render(_react2.default.createElement(_App2.default, null), ap
 
 /***/ }),
 
-/***/ 119:
+/***/ 144:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -137,7 +137,7 @@ var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(14);
+var _reactDom = __webpack_require__(15);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -219,7 +219,7 @@ exports.default = Header;
 
 /***/ }),
 
-/***/ 120:
+/***/ 145:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -235,7 +235,7 @@ var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(14);
+var _reactDom = __webpack_require__(15);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -287,7 +287,7 @@ exports.default = Category;
 
 /***/ }),
 
-/***/ 121:
+/***/ 146:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -303,11 +303,11 @@ var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(14);
+var _reactDom = __webpack_require__(15);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _Gallery = __webpack_require__(124);
+var _Gallery = __webpack_require__(149);
 
 var _Gallery2 = _interopRequireDefault(_Gallery);
 
@@ -496,7 +496,7 @@ exports.default = Details;
 
 /***/ }),
 
-/***/ 122:
+/***/ 147:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -512,9 +512,13 @@ var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(14);
+var _reactDom = __webpack_require__(15);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _axios = __webpack_require__(125);
+
+var _axios2 = _interopRequireDefault(_axios);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -633,6 +637,15 @@ var Home = function (_Component) {
     }
 
     _createClass(Home, [{
+        key: "componentWillMount",
+        value: function componentWillMount() {
+            _axios2.default.get('/api/categories').then(function (res) {
+                console.log(res);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
+    }, {
         key: "render",
         value: function render() {
             return _react2.default.createElement(
@@ -681,7 +694,7 @@ exports.default = Home;
 
 /***/ }),
 
-/***/ 123:
+/***/ 148:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -697,7 +710,7 @@ var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(14);
+var _reactDom = __webpack_require__(15);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -923,7 +936,7 @@ exports.default = Listings;
 
 /***/ }),
 
-/***/ 124:
+/***/ 149:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -939,7 +952,7 @@ var _react = __webpack_require__(5);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(14);
+var _reactDom = __webpack_require__(15);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
@@ -974,11 +987,24 @@ var Gallery = function (_Component) {
         return _react2.default.createElement("div", {
           key: index,
           className: "thumb-img",
+          onClick: function onClick() {
+            return _this.clickedThumbnailHandler(index);
+          },
           style: {
             backgroundImage: "url('" + item + "')"
           }
         });
       });
+    }, _this.nextBtn = function () {
+      if (_this.state.currentIndex != _this.state.allImgs.length - 1) {
+        _this.setState({ currentIndex: _this.state.currentIndex + 1 });
+      }
+    }, _this.prevBtn = function () {
+      if (_this.state.currentIndex != 0) {
+        _this.setState({ currentIndex: _this.state.currentIndex - 1 });
+      }
+    }, _this.clickedThumbnailHandler = function (index) {
+      _this.setState({ currentIndex: index });
     }, _temp), _possibleConstructorReturn(_this, _ret);
   }
 
@@ -1007,18 +1033,18 @@ var Gallery = function (_Component) {
             { className: "main-image" },
             _react2.default.createElement(
               "div",
-              { className: "arrows left-arrow" },
-              "<"
+              { className: "arrows left-arrow", onClick: this.prevBtn },
+              _react2.default.createElement("i", { className: "fa fa-chevron-left" })
             ),
             _react2.default.createElement(
               "div",
-              { className: "arrows right-arrow" },
-              ">"
+              { className: "arrows right-arrow", onClick: this.nextBtn },
+              _react2.default.createElement("i", { className: "fa fa-chevron-right" })
             ),
             _react2.default.createElement("div", {
               className: "image-1",
               style: {
-                backgroundImage: "url('" + this.state.currentImg + "')"
+                backgroundImage: "url('" + this.state.allImgs[this.state.currentIndex] + "')"
               }
             })
           )
@@ -1039,4 +1065,4 @@ exports.default = Gallery;
 
 /***/ })
 
-},[118]);
+},[143]);
