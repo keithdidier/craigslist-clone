@@ -7,13 +7,26 @@ class Home extends Component {
   constructor() {
     super();
     this.state = {
-      name: "Joe"
+      name: "Joe",
+      categoriesData: ''
     };
   }
 
   componentWillMount() {
-    axios.get('/api/categories').then(res => {
-        console.log(res);        
+   
+  }
+
+  componentDidMount() {
+      const {match, history} = this.props;
+      if(match.params.city == undefined) {
+          history.push('/nyc');
+      }
+
+      axios.get(`/api/${match.params.city}`).then(res => {  
+        this.setState({
+            categoriesData: res.data
+        });
+        console.log(this.state);       
     })
     .catch(error => {
         console.log(error);
@@ -24,29 +37,29 @@ class Home extends Component {
     console.log("swag");
   };
 
-  categoriesLooped = () => {
-      let testArray = [1,2,3,4,5,6,7];
-      return testArray.map((item, index) => {
-        return (
-            <div key={index} className="categories">
-                <div className="title">Community</div>
-                <div className="group-links">
-                    <a href="#" className="link">Community</a>
-                    <a href="#" className="link">General</a>
-                    <a href="#" className="link">Activities</a>
-                    <a href="#" className="link">Groups</a>                
-                    <a href="#" className="link">Artists</a>                                                                
-                    <a href="#" className="link">Local News</a>
-                    <a href="#" className="link">Child Care</a>
-                    <a href="#" className="link">Lost & Found</a>
-                    <a href="#" className="link">Classes</a>
-                    <a href="#" className="link">Musicians</a>
-                    <a href="#" className="link">Events</a>                
-                    <a href="#" className="link">Pets</a>
-                </div>  
-            </div>
-        );
-      });
+  mappedCategoriesData = () => {
+    const {match, history} = this.props;
+    if(this.state.categoriesData != '') {
+        return this.state.categoriesData.map((category, index) => {
+            const mappedListings = () => {
+                return category.listings.map((listing, index) => {
+                    return (
+                        <a href={`${category.title}/${listing.slug}`} className="link" key={index}>{listing.name}</a>
+                    );
+                });
+            }
+            return (
+                <div key={index} className="categories">
+                    <a href={`/${match.params.city}/${category.title}`} className="title">{category.title}</a>
+                    <div className={`group-links ${category.title == 'housing' ? 'single-col' : ''}`}>
+                        {mappedListings()}
+                    </div>  
+                </div>
+            ); 
+        }); 
+    }
+  
+           
   }
 
   tagsLooped = () => {
@@ -54,16 +67,18 @@ class Home extends Component {
       return testTags.map((item, index) => <div key={index} className="tag">Apple MacBook</div>);
   }
 
+
+
   render() {
     return (
         <div className="home">
             <div className="container">
                 <h1>Connecting People <br />Everywhere</h1>
                 <section className="links">
-                    {this.categoriesLooped()}                                                                             
+                    {this.mappedCategoriesData()}                                                                             
                 </section>
                 <section className="trending">
-                    <input type="text" name="search" className="search" />
+                    <input type="text" name="search" className="search" placeholder="Search" />
                     <div className="title"><i className="fas fa-clock"></i> Trending Now</div>
                     <div className="trending-tags">
                         {this.tagsLooped()}
